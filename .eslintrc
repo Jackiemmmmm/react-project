@@ -6,7 +6,13 @@
     "import/no-unresolved": [0],
     "import/no-extraneous-dependencies": [0],
     "import/extensions": [0],
-    "no-console": [0]
+    "no-console": [0],
+    "jsx-a11y/anchor-is-valid": [ "error", {
+      "components": [],
+      "specialLink": [ "hrefLeft", "hrefRight" ],
+      "aspects": [ "noHref", "invalidHref", "preferButton" ]
+    }],
+    "react/prop-types": [0]
   },
   "env": {
     "browser": true,
