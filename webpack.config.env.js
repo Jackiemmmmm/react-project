@@ -9,7 +9,6 @@ const BUILD_PATH = resolve(ROOT_PATH, 'build');
 module.exports = Object.assign(baseConfig, {
   entry: {
     vendor: [
-      'babel-polyfill',
       BASE_PATH,
     ],
   },

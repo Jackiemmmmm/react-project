@@ -12,7 +12,7 @@ const extractCSS = new ExtractTextPlugin({
   disable: false,
 });
 const antdCSS = new ExtractTextPlugin({
-  filename: ifProduction('assets/bundle.css?v=[contenthash]', 'assets/bundle.css'),
+  filename: ifProduction('assets/antd.css?v=[contenthash]', 'assets/antd.css'),
   allChunks: true,
   disable: false,
 });
@@ -36,7 +36,16 @@ const commonExtract = {
 const lessExtract = {
   fallback: 'style-loader',
   use: [
-    'css-loader',
+    {
+      loader: 'css-loader',
+      options: {
+        modules: true,
+        sourceMap: true,
+        minimize: true,
+        importLoaders: 1,
+        localIdentName: '[local]',
+      },
+    },
     'less-loader',
   ],
 };
@@ -51,7 +60,7 @@ module.exports = {
     rules: [
       {
         test: /\.css$/,
-        exclude: /^node_modules$/,
+        exclude: /node_modules/,
         use: extractCSS.extract(commonExtract),
       },
       {
@@ -106,6 +115,9 @@ module.exports = {
       'node_modules',
     ],
     extensions: ['.js', '.jsx', '.json'],
+    alias: {
+      'react-dom': ifProduction(resolve('./node_modules/react-dom/cjs/react-dom.production.min.js'), resolve('./node_modules/react-dom/cjs/react-dom.development.js')),
+    },
   },
   plugins: removeEmpty([
     // ifNotProduction(new BundleAnalyzerPlugin()),
@@ -133,7 +145,7 @@ module.exports = {
     ),
     new webpack.optimize.CommonsChunkPlugin({
       name: 'vendor',
-      filename: ifProduction('assets/vendor.bundle.js?v=[chunkhash]', 'vendor.bundle.js'),
+      filename: ifProduction('assets/vendor.bundle.js?v=[hash]', 'vendor.bundle.js'),
     }),
     extractCSS,
     antdCSS,

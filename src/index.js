@@ -6,6 +6,7 @@ import {
   Switch,
 } from 'react-router-dom';
 import NoMatch from 'containers/NoMatch';
+import 'antd/dist/antd.less';
 import Provider from './provider';
 
 const asyncComponent = getComponent => (

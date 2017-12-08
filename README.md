@@ -2,17 +2,29 @@
 
 <h2 align="left">Install</h2>
 
-```bash
+```sh
+npm i
+
+# or
+
 yarn
 ```
 <h2 align="left">Usage</h2>
 
-```bash
+```sh
+npm start
+
+# or
+
 yarn start
 ```
 
 <h2 align="left">Build</h2>
 
-```bash
+```sh
+npm run bulid
+
+# or
+
 yarn build
 ```

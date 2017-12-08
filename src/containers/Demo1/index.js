@@ -1,9 +1,6 @@
 import React, { PureComponent } from 'react';
 import { Link } from 'react-router-dom';
 import { DatePicker, version } from 'antd';
-import test from 'antd/dist/antd.less';
-
-console.log(test);
 
 class Demo1 extends PureComponent {
   componentWillMount() {
