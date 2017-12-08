@@ -5,13 +5,11 @@ import {
   Route,
   Switch,
 } from 'react-router-dom';
-// import Demo from 'containers/Demo';
-// import Demo1 from 'containers/Demo1';
 import NoMatch from 'containers/NoMatch';
 import Provider from './provider';
 
-function asyncComponent(getComponent) {
-  return class AsyncComponent extends React.Component {
+const asyncComponent = getComponent => (
+  class AsyncComponent extends React.Component {
     static Component = null;
     state = { Component: AsyncComponent.Component };
 
@@ -30,8 +28,9 @@ function asyncComponent(getComponent) {
       }
       return null;
     }
-  };
-}
+  }
+);
+
 /* global System */
 const Demo = asyncComponent(() => (
   System.import(/* webpackChunkName: "Demo" */'containers/Demo').then(module => module.default)

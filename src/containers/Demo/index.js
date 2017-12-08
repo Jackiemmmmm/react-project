@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { demoTest } from 'actions/Demo';
 import styles from './styles.css';
 
 @connect(
@@ -8,7 +9,7 @@ import styles from './styles.css';
     test: state.Home.test,
   }),
   dispatch => ({
-    _getTest: () => dispatch({ type: 'TEST', test: 'change' }),
+    _getTest: () => dispatch(demoTest()),
   }),
 )
 
