@@ -1,9 +1,13 @@
 import React, { PureComponent } from 'react';
 import { Link } from 'react-router-dom';
+import { DatePicker, version } from 'antd';
+import test from 'antd/dist/antd.less';
+
+console.log(test);
 
 class Demo1 extends PureComponent {
   componentWillMount() {
-    console.log('Demo1');
+    console.log('Demo1', version);
   }
   render() {
     return (
@@ -16,6 +20,9 @@ class Demo1 extends PureComponent {
         <br />
         <br />
         <button onClick={() => this.props.history.push('/')}>Test</button>
+        <br />
+        <br />
+        <DatePicker />
       </div>
     );
   }

@@ -2,11 +2,16 @@ const webpack = require('webpack');
 const { resolve } = require('path');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const { getIfUtils, removeEmpty } = require('webpack-config-utils');
-// const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+// const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 
 const { ifProduction } = getIfUtils(process.env.NODE_ENV); // , ifNotProduction
 
 const extractCSS = new ExtractTextPlugin({
+  filename: ifProduction('assets/bundle.css?v=[contenthash]', 'assets/bundle.css'),
+  allChunks: true,
+  disable: false,
+});
+const antdCSS = new ExtractTextPlugin({
   filename: ifProduction('assets/bundle.css?v=[contenthash]', 'assets/bundle.css'),
   allChunks: true,
   disable: false,
@@ -28,6 +33,14 @@ const commonExtract = {
   ],
 };
 
+const lessExtract = {
+  fallback: 'style-loader',
+  use: [
+    'css-loader',
+    'less-loader',
+  ],
+};
+
 module.exports = {
   devtool: ifProduction(false, 'source-map'),
   output: {
@@ -40,6 +53,10 @@ module.exports = {
         test: /\.css$/,
         exclude: /^node_modules$/,
         use: extractCSS.extract(commonExtract),
+      },
+      {
+        test: /\.less$/,
+        use: antdCSS.extract(lessExtract),
       },
       {
         test: /\.(ttf|eot|otf|svg|woff(2)?)(\?[a-z0-9]+)?$/,
@@ -119,5 +136,6 @@ module.exports = {
       filename: ifProduction('assets/vendor.bundle.js?v=[chunkhash]', 'vendor.bundle.js'),
     }),
     extractCSS,
+    antdCSS,
   ]),
 };
