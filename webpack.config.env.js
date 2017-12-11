@@ -26,7 +26,7 @@ module.exports = Object.assign(baseConfig, {
   plugins: baseConfig.plugins.concat([
     new HtmlwebpackPlugin({
       template: 'src/index.html',
-      chunks: ['vendor'],
+      chunks: ['vendor', 'app'],
       inject: false,
       minify: {
         removeAttributeQuotes: true,
