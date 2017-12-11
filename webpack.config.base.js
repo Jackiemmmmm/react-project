@@ -3,16 +3,17 @@ const { resolve } = require('path');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const { getIfUtils, removeEmpty } = require('webpack-config-utils');
 // const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
+const ClosureCompilerPlugin = require('webpack-closure-compiler');
 
 const { ifProduction } = getIfUtils(process.env.NODE_ENV); // , ifNotProduction
 
 const extractCSS = new ExtractTextPlugin({
-  filename: ifProduction('assets/bundle.css?v=[contenthash]', 'assets/bundle.css'),
+  filename: ifProduction('assets/bundle.css?v=[contenthash:5]', 'assets/bundle.css'),
   allChunks: true,
   disable: false,
 });
 const antdCSS = new ExtractTextPlugin({
-  filename: ifProduction('assets/antd.css?v=[contenthash]', 'assets/antd.css'),
+  filename: ifProduction('assets/antd.css?v=[contenthash:5]', 'assets/antd.css'),
   allChunks: true,
   disable: false,
 });
@@ -53,8 +54,8 @@ const lessExtract = {
 module.exports = {
   devtool: ifProduction(false, 'source-map'),
   output: {
-    filename: ifProduction('assets/[name].bundle.js?v=[hash]', '[name].bundle.js'),
-    chunkFilename: ifProduction('assets/[id].chunk.js?v=[chunkhash]', '[name].chunk.js'),
+    filename: ifProduction('assets/[name].bundle.js?v=[hash:5]', '[name].bundle.js'),
+    chunkFilename: ifProduction('assets/[id].chunk.js?v=[chunkhash:5]', '[name].chunk.js'),
   },
   module: {
     rules: [
@@ -81,7 +82,7 @@ module.exports = {
         loader: 'url-loader',
         options: {
           limit: 10240,
-          name: ifProduction('images/[name].[ext]?v=[hash:base64:5]', 'images/[name].[ext]'),
+          name: ifProduction('images/[name].[ext]?v=[hash:5]', 'images/[name].[ext]'),
         },
       },
       {
@@ -115,38 +116,27 @@ module.exports = {
       'node_modules',
     ],
     extensions: ['.js', '.jsx', '.json'],
-    alias: {
-      'react-dom': ifProduction(resolve('./node_modules/react-dom/cjs/react-dom.production.min.js'), resolve('./node_modules/react-dom/cjs/react-dom.development.js')),
-    },
   },
   plugins: removeEmpty([
-    // ifNotProduction(new BundleAnalyzerPlugin()),
-    ifProduction(
-      new webpack.optimize.UglifyJsPlugin({
-        compress: {
-          // display warnings when dropping unreachable code or unused declarations etc
-          warnings: false,
-          // Pass true to discard calls to console.* functions
-          drop_console: true,
-          // apply optimizations for if-s and conditional expressions
-          conditionals: true,
-          // drop unreferenced functions and variables
-          unused: true,
-          // remove unreachable code
-          dead_code: true,
-          // optimizations for if/return and if/continue
-          if_return: true,
-        },
-      }),
-      new webpack.LoaderOptionsPlugin({
-        minimize: true,
-        debug: false,
-      }),
-    ),
+    // ifProduction(new BundleAnalyzerPlugin()),
+    new webpack.DefinePlugin({
+      'process.env': {
+        NODE_ENV: JSON.stringify(process.env.NODE_ENV || 'development'),
+      },
+    }),
     new webpack.optimize.CommonsChunkPlugin({
       name: 'vendor',
-      filename: ifProduction('assets/vendor.bundle.js?v=[hash]', 'vendor.bundle.js'),
+      filename: ifProduction('assets/vendor.bundle.js?v=[hash:5]', 'vendor.bundle.js'),
     }),
+    ifProduction(new ClosureCompilerPlugin({
+      compiler: {
+        charset: 'utf-8',
+        create_source_map: true,
+        language_in: 'ECMASCRIPT5_STRICT',
+        language_out: 'ECMASCRIPT5_STRICT',
+      },
+    })),
+    // new webpack.optimize.ModuleConcatenationPlugin(),
     extractCSS,
     antdCSS,
   ]),
