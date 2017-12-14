@@ -1,11 +1,12 @@
 import ReactDOM from 'react-dom';
 import React from 'react';
 import {
-  BrowserRouter as Router,
   Route,
   Switch,
+  Redirect,
 } from 'react-router-dom';
-import NoMatch from 'containers/NoMatch';
+// import NoMatch from 'containers/NoMatch';
+import Layout from 'containers/Layout';
 import Provider from './provider';
 
 const asyncComponent = getComponent => (
@@ -32,22 +33,22 @@ const asyncComponent = getComponent => (
 );
 
 /* global System */
-const Demo = asyncComponent(() => (
-  System.import(/* webpackChunkName: "Demo" */'containers/Demo').then(module => module.default)
+const Home = asyncComponent(() => (
+  System.import(/* webpackChunkName: "Home" */'containers/Home').then(module => module.default)
 ));
-const Demo1 = asyncComponent(() => (
-  System.import(/* webpackChunkName: "Demo1" */'containers/Demo1').then(module => module.default)
+const TradeSearch = asyncComponent(() => (
+  System.import(/* webpackChunkName: "TradeSearch" */'containers/TradeSearch').then(module => module.default)
 ));
 
 ReactDOM.render(
   <Provider>
-    <Router>
+    <Layout>
       <Switch>
-        <Route exact path="/" component={Demo} />
-        <Route path="/demo1" component={Demo1} />
-        <Route component={NoMatch} />
+        <Route exact path="/" component={Home} />
+        <Route exact path="/tradeSearch/:searchname" component={TradeSearch} />
+        <Redirect from="/tradeSearch" to="/tradeSearch/allTransition" />
       </Switch>
-    </Router>
+    </Layout>
   </Provider>,
   document.getElementById('app'),
 );

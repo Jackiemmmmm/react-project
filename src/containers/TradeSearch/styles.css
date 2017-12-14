@@ -1,0 +1,10 @@
+.transition_content {
+  padding: 20px;
+  .transition_layout {
+    padding: 24px 0;
+    background: #ffffff;
+  }
+  .sider {
+    background-color: #ffffff;
+  }
+}

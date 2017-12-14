@@ -2,7 +2,7 @@ const webpack = require('webpack');
 const { resolve } = require('path');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const { getIfUtils, removeEmpty } = require('webpack-config-utils');
-// const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const ClosureCompilerPlugin = require('webpack-closure-compiler');
 
 const { ifProduction } = getIfUtils(process.env.NODE_ENV); // , ifNotProduction
@@ -60,13 +60,13 @@ module.exports = {
   module: {
     rules: [
       {
+        test: /\.less$/,
+        use: antdCSS.extract(lessExtract),
+      },
+      {
         test: /\.css$/,
         exclude: /node_modules/,
         use: extractCSS.extract(commonExtract),
-      },
-      {
-        test: /\.less$/,
-        use: antdCSS.extract(lessExtract),
       },
       {
         test: /\.(ttf|eot|otf|svg|woff(2)?)(\?[a-z0-9]+)?$/,
@@ -118,7 +118,7 @@ module.exports = {
     extensions: ['.js', '.jsx', '.json'],
   },
   plugins: removeEmpty([
-    // ifProduction(new BundleAnalyzerPlugin()),
+    
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: JSON.stringify(process.env.NODE_ENV || 'development'),
@@ -137,7 +137,8 @@ module.exports = {
       },
     })),
     // new webpack.optimize.ModuleConcatenationPlugin(),
-    extractCSS,
     antdCSS,
+    extractCSS,
+    new BundleAnalyzerPlugin(),
   ]),
 };
