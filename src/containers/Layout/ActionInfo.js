@@ -15,6 +15,10 @@ import styles from './styles.css';
 )
 
 export default class ActionInfo extends PureComponent {
+  componentWillMount() {
+    const { locale } = this.props;
+    moment.locale(locale === 'en' ? 'en' : 'zh-cn');
+  }
   _languageMenu() {
     return (
       <Menu className={styles.language_menu} onClick={this._onClickButton}>
@@ -31,7 +35,6 @@ export default class ActionInfo extends PureComponent {
     const { _changeLang, locale } = this.props;
     if (locale === e.key) return;
     moment.locale(e.key === 'en' ? 'en' : 'zh-cn');
-    console.log(moment.locale(e.key === 'en' ? 'en' : 'zh-cn'));
     _changeLang(e.key);
   }
   render() {

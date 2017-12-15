@@ -9,6 +9,10 @@ import createRavenMiddleware from './createRavenMiddleware';
 const prod = process.env.ENV === 'prod';
 const RAVEN_DSN = 'http://9cda3aff14d3424e942c870f60022e4c@10.0.22.42:9000/2';
 
+const create = (typeof window !== 'undefined' && window.devToolsExtension)
+  ? window.devToolsExtension({ actionsBlacklist: ['@@redux-form'] })(createStore)
+  : createStore;
+
 export const history = createBrowserHistory();
 
 const middleware = routerMiddleware(history);
@@ -19,10 +23,7 @@ if (prod) {
   newMiddleware = applyMiddleware(thunk, middleware, createRavenMiddleware(Raven, {}));
 }
 
-export const store = createStore(
-  combineReducers({
-    ...reducers,
-    router: routerReducer,
-  }),
-  newMiddleware,
-);
+export const store = newMiddleware(create)(combineReducers({
+  ...reducers,
+  router: routerReducer,
+}));

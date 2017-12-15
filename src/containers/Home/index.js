@@ -32,9 +32,9 @@ export default class Home extends PureComponent {
         <br />
         <Pagination defaultCurrent={1} total={50} showSizeChanger />
         <br />
-        <RangePicker />
+        Range Picker: <RangePicker />
         <br />
-        <DatePickerTest />
+        Component Picker: <DatePickerTest />
         <br />
         {test}
         <button onClick={() => _getTest()}>Change reducer</button>
