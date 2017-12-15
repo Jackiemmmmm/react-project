@@ -14,8 +14,6 @@ module.exports = Object.assign(baseConfig, {
       'react-dom',
       'react-router',
       'react-router-dom',
-    ],
-    app: [
       BASE_PATH,
     ],
   },
@@ -26,7 +24,7 @@ module.exports = Object.assign(baseConfig, {
   plugins: baseConfig.plugins.concat([
     new HtmlwebpackPlugin({
       template: 'src/index.html',
-      chunks: ['vendor', 'app'],
+      chunks: ['vendor'],
       inject: false,
       minify: {
         removeAttributeQuotes: true,
