@@ -8,6 +8,8 @@ const Home = (state = defaultValue, action) => {
         ...state,
         test: action.test,
       };
+    case 'CRUSH_IN_THE_REDUCER':
+      throw new Error('Crash Test send');
     default:
       return state;
   }

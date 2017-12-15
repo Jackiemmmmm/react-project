@@ -2,7 +2,7 @@ const webpack = require('webpack');
 const { resolve } = require('path');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const { getIfUtils, removeEmpty } = require('webpack-config-utils');
-const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
+// const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const ClosureCompilerPlugin = require('webpack-closure-compiler');
 
 const { ifProduction } = getIfUtils(process.env.NODE_ENV); // , ifNotProduction
@@ -138,6 +138,6 @@ module.exports = {
     // new webpack.optimize.ModuleConcatenationPlugin(),
     antdCSS,
     extractCSS,
-    new BundleAnalyzerPlugin(),
+    // new BundleAnalyzerPlugin(),
   ]),
 };

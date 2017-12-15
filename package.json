@@ -21,6 +21,7 @@
   "dependencies": {
     "antd": "^3.0.0",
     "axios": "^0.17.1",
+    "raven-js": "^3.21.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-intl": "^2.4.0",

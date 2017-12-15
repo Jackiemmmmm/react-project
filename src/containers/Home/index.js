@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Pagination, DatePicker } from 'antd';
-import { demoTest } from 'actions/Demo';
+import { demoTest, crashButton } from 'actions/Demo';
 import DatePickerTest from 'components/DatePicker';
 import styles from './styles.css';
 
@@ -15,6 +15,7 @@ const { RangePicker } = DatePicker;
   }),
   dispatch => ({
     _getTest: () => dispatch(demoTest()),
+    _crashButton: () => dispatch(crashButton()),
   }),
 )
 
@@ -23,7 +24,7 @@ export default class Home extends PureComponent {
     console.log(this.props.test);
   }
   render() {
-    const { test, _getTest } = this.props;
+    const { test, _getTest, _crashButton } = this.props;
     return (
       <div className={styles.test}>
         Home
@@ -37,6 +38,8 @@ export default class Home extends PureComponent {
         <br />
         {test}
         <button onClick={() => _getTest()}>Change reducer</button>
+        <br />
+        <button onClick={() => _crashButton()}>Crash reducer</button>
       </div>
     );
   }
