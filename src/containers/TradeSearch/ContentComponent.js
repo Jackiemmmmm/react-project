@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import FormComponent from './FormComponent';
+import TableComponent from './TableComponent';
 
 @connect(state => ({
   locale: state.Intl.locale,
@@ -16,6 +17,7 @@ export default class ContentComponent extends PureComponent {
       <div>
         Content Component {url}
         <FormComponent />
+        <TableComponent />
       </div>
     );
   }
