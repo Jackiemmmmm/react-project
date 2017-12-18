@@ -1,11 +1,21 @@
 import React, { PureComponent } from 'react';
 import { Layout, Menu } from 'antd';
+import { connect } from 'react-redux';
+import { IntlProvider, FormattedMessage } from 'react-intl';
 import ContentComponent from './ContentComponent';
 import styles from './styles.css';
+import messages from './messages.json';
 
 const {
   Content, Sider,
 } = Layout;
+
+const list = ['allTransition', 'mobiTransition', 'onchainTransition', 'cardTransition'];
+
+@connect(state => ({
+  locale: state.Intl.locale,
+}))
+
 
 export default class TradeSearch extends PureComponent {
   _handleClick = (e) => {
@@ -14,7 +24,7 @@ export default class TradeSearch extends PureComponent {
   };
 
   render() {
-    const { match } = this.props;
+    const { match, locale } = this.props;
     const { searchname } = match.params;
     return (
       <Content className={styles.transition_content}>
@@ -25,13 +35,14 @@ export default class TradeSearch extends PureComponent {
               mode="inline"
               defaultSelectedKeys={[`${searchname}`]}
             >
-              <Menu.Item key="allTransition">All Transition</Menu.Item>
-              <Menu.Item key="mobiTransition">Mobi Transition</Menu.Item>
-              <Menu.Item key="onchainTransition">Onchain Transition</Menu.Item>
-              <Menu.Item key="cardTransition">Card Transition</Menu.Item>
+              {list.map(value => (
+                <Menu.Item key={value}><FormattedMessage id={value} /></Menu.Item>
+              ))}
             </Menu>
           </Sider>
-          <ContentComponent url={searchname} />
+          <IntlProvider locale={locale} messages={messages[locale]}>
+            <ContentComponent url={searchname} />
+          </IntlProvider>
         </Layout>
       </Content>
     );

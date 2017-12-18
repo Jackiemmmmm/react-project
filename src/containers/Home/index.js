@@ -3,11 +3,11 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Pagination, DatePicker } from 'antd';
 import { demoTest, crashButton } from 'actions/Demo';
-import DatePickerTest from 'components/DatePicker';
 import styles from './styles.css';
 
 const { RangePicker } = DatePicker;
 
+let forceRerender = 0;
 
 @connect(
   state => ({
@@ -25,6 +25,7 @@ export default class Home extends PureComponent {
   }
   render() {
     const { test, _getTest, _crashButton } = this.props;
+    forceRerender += 1;
     return (
       <div className={styles.test}>
         Home
@@ -32,9 +33,7 @@ export default class Home extends PureComponent {
         <br />
         <Pagination defaultCurrent={1} total={50} showSizeChanger />
         <br />
-        Range Picker: <RangePicker />
-        <br />
-        Component Picker: <DatePickerTest />
+        Range Picker: <RangePicker key={forceRerender} />
         <br />
         {test}
         <button onClick={() => _getTest()}>Change reducer</button>
