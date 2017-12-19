@@ -21,7 +21,11 @@
     "phoneNumberLabel": "电话号码",
     "selectPlaceholder": "请输入货币",
     "search": "搜索",
-    "clear": "清除"
+    "clear": "清除",
+    "Successed": "成功",
+    "Failed": "失败",
+    "Pending": "进行中",
+    "Cancel": "取消"
   },
   "en": {
     "all": "All",
@@ -45,6 +49,10 @@
     "phoneNumberLabel": "Phone Number",
     "selectPlaceholder": "Please Input Currency Type",
     "search": "Search",
-    "clear": "Clear"
+    "clear": "Clear",
+    "Successed": "Successed",
+    "Failed": "Failed",
+    "Pending": "Pending",
+    "Cancel": "Cancel"
   }
 }

@@ -1,11 +1,11 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
+import { FormattedMessage } from 'react-intl';
 import { Table, Button } from 'antd';
 import 'file-saver';
 import TableExport from 'tableexport';
 import getTransactions from 'actions/getTransactions';
 import antd from './styles.less';
-import messages from './messages.json';
 
 const columns = [{
   title: 'Create Time',
@@ -16,9 +16,11 @@ const columns = [{
 }, {
   title: 'Type',
   dataIndex: 'type',
+  render: text => <FormattedMessage id={text} />,
 }, {
   title: 'Status',
   dataIndex: 'status',
+  render: text => <FormattedMessage id={text} />,
 }, {
   title: 'Amount',
   dataIndex: 'transferAmount',
