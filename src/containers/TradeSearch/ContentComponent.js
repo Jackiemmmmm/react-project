@@ -15,9 +15,8 @@ export default class ContentComponent extends PureComponent {
     const { url } = this.props;
     return (
       <div>
-        Content Component {url}
         <FormComponent />
-        <TableComponent />
+        <TableComponent url={url} />
       </div>
     );
   }
