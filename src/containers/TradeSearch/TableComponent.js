@@ -5,43 +5,47 @@ import { Table, Button } from 'antd';
 import 'file-saver';
 import TableExport from 'tableexport';
 import getTransactions from 'actions/getTransactions';
+import stringifyVolumn from 'utils/format';
 import antd from './styles.less';
 
 const columns = [{
-  title: 'Create Time',
+  title: <FormattedMessage id="createTime" />,
   dataIndex: 'createTime',
 }, {
-  title: 'Mobi Transactions',
+  title: <FormattedMessage id="mobiTransactions" />,
   dataIndex: 'mobiTransactions',
 }, {
-  title: 'Type',
+  title: <FormattedMessage id="type" />,
   dataIndex: 'type',
   render: text => <FormattedMessage id={text} />,
 }, {
-  title: 'Status',
+  title: <FormattedMessage id="status" />,
   dataIndex: 'status',
   render: text => <FormattedMessage id={text} />,
 }, {
-  title: 'Amount',
+  title: <FormattedMessage id="transferAmount" />,
   dataIndex: 'transferAmount',
+  render: text => stringifyVolumn(text),
 }, {
-  title: 'Fee',
+  title: <FormattedMessage id="fee" />,
   dataIndex: 'fee',
 }, {
-  title: 'Currency',
+  title: <FormattedMessage id="currency" />,
   dataIndex: 'currency',
 }, {
-  title: 'Payer',
+  title: <FormattedMessage id="payer" />,
   dataIndex: 'payer',
 }, {
-  title: 'Payer Balance',
+  title: <FormattedMessage id="payerBalance" />,
   dataIndex: 'payerBalance',
+  render: text => stringifyVolumn(text),
 }, {
-  title: 'Payee',
+  title: <FormattedMessage id="payee" />,
   dataIndex: 'payee',
 }, {
-  title: 'Payee Balance',
+  title: <FormattedMessage id="payeeBalance" />,
   dataIndex: 'payeeBalance',
+  render: text => stringifyVolumn(text),
 }];
 
 
@@ -67,11 +71,19 @@ export default class TableComponent extends PureComponent {
     }
   }
   _exportCSV = () => {
-    const table = TableExport(document.getElementsByClassName('ant-table-body')[0].children[0], {
-      formats: ['csv'],
-      exportButtons: false,
-    }).getExportData();
-    console.log(table);
+    // const { data } = this.props;
+    // if (data === null || !data.length) return;
+    // let csvContent = 'data:text/csv;charset=utf-8,';
+    // csvContent += `${Object.keys(data[0]).join(',')}\r\n`;
+    // for (let i = 0, len = data.length; i < len; i += 1) {
+    //   const numberToString =
+    // Object.values(data[i]).map(v => (typeof v === 'string' ? v : v.toString()));
+    //   const row = numberToString.join(',');
+    //   console.log(row);
+    //   csvContent += `${row}\r\n`;
+    // }
+    // const encodedUri = encodeURI(csvContent);
+    // window.open(encodedUri);
   }
   render() {
     const { data, loading } = this.props;

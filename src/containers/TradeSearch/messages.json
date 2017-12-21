@@ -25,7 +25,18 @@
     "Successed": "成功",
     "Failed": "失败",
     "Pending": "进行中",
-    "Cancel": "取消"
+    "Cancel": "取消",
+    "createTime": "创建时间",
+    "mobiTransactions": "Mobi 交易编号",
+    "type": "类型",
+    "status": "状态",
+    "transferAmount": "交易总金额",
+    "fee": "手续费",
+    "currency": "货币",
+    "payer": "付款人",
+    "payerBalance": "付款人交易后余额",
+    "payee": "收款人",
+    "payeeBalance": "收款人交易后余额"
   },
   "en": {
     "all": "All",
@@ -53,6 +64,17 @@
     "Successed": "Successed",
     "Failed": "Failed",
     "Pending": "Pending",
-    "Cancel": "Cancel"
+    "Cancel": "Cancel",
+    "createTime": "Create Time",
+    "mobiTransactions": "Mobi Transactions",
+    "type": "Type",
+    "status": "Status",
+    "transferAmount": "Transfer Amount",
+    "fee": "Fee",
+    "currency": "Currency",
+    "payer": "Payer",
+    "payerBalance": "Payer Balance",
+    "payee": "Payee",
+    "payeeBalance": "Payee Balance"
   }
 }
