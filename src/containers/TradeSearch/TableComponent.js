@@ -2,8 +2,8 @@ import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import { Table, Button } from 'antd';
-import 'file-saver';
-import TableExport from 'tableexport';
+// import 'file-saver';
+// import TableExport from 'tableexport';
 import getTransactions from 'actions/getTransactions';
 import stringifyVolumn from 'utils/format';
 import antd from './styles.less';
@@ -38,7 +38,6 @@ const columns = [{
 }, {
   title: <FormattedMessage id="payerBalance" />,
   dataIndex: 'payerBalance',
-  render: text => stringifyVolumn(text),
 }, {
   title: <FormattedMessage id="payee" />,
   dataIndex: 'payee',

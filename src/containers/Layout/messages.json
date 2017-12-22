@@ -2,6 +2,7 @@
   "zh": {
     "home": "主页",
     "tradeSearch": "交易查询",
+    "exchange": "交易Api",
     "allTransition": "全部交易",
     "mobiTransition": "Mobi 交易",
     "onchainTransition": "Onchain 交易",
@@ -10,6 +11,7 @@
   "en": {
     "home": "Home",
     "tradeSearch": "Transition Search",
+    "exchange": "Exchange Api",
     "allTransition": "All Transition",
     "mobiTransition": "Mobi Transition",
     "onchainTransition": "Onchain Transition",

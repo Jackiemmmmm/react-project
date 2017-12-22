@@ -4,7 +4,7 @@ import { createTime, type, status, fee, currency, phoneFirst, phoneLast } from '
 const random = arr => arr[Math.floor(Math.random() * arr.length)];
 
 const dataTransactions = [];
-for (let i = 1, length = Math.floor(Math.random() * 10); i <= length; i += 1) {
+for (let i = 1, length = Math.floor(Math.random() * 1000); i <= length; i += 1) {
   const insideRandom = Math.random();
   dataTransactions.push({
     key: i,

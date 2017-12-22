@@ -5,6 +5,7 @@ import thunk from 'redux-thunk';
 import { routerReducer, routerMiddleware } from 'react-router-redux';
 import reducers from './reducers';
 import createRavenMiddleware from './createRavenMiddleware';
+import publicSocket from './middleware/poloniexSocket';
 
 const prod = process.env.ENV === 'prod';
 const RAVEN_DSN = 'http://9cda3aff14d3424e942c870f60022e4c@10.0.22.42:9000/2';
@@ -17,10 +18,15 @@ export const history = createBrowserHistory();
 
 const middleware = routerMiddleware(history);
 
-let newMiddleware = applyMiddleware(thunk, middleware);
+let newMiddleware = applyMiddleware(thunk, middleware, publicSocket);
 if (prod) {
   Raven.config(RAVEN_DSN).install();
-  newMiddleware = applyMiddleware(thunk, middleware, createRavenMiddleware(Raven, {}));
+  newMiddleware = applyMiddleware(
+    thunk,
+    middleware,
+    createRavenMiddleware(Raven, {}),
+    publicSocket,
+  );
 }
 
 export const store = newMiddleware(create)(combineReducers({

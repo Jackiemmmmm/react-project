@@ -43,6 +43,7 @@ export default class BreadcrumbComponent extends PureComponent {
       case 'mobiTransition':
       case 'onchainTransition':
       case 'cardTransition':
+      case 'exchange':
         return <FormattedMessage id={name} />;
       default:
         return <FormattedMessage id="home" />;

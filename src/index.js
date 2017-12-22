@@ -39,6 +39,9 @@ const Home = asyncComponent(() => (
 const TradeSearch = asyncComponent(() => (
   System.import(/* webpackChunkName: "TradeSearch" */'containers/TradeSearch').then(module => module.default)
 ));
+const ExchangeApi = asyncComponent(() => (
+  System.import(/* webpackChunkName: "ExchangeApi" */'containers/ExchangeApi').then(module => module.default)
+));
 
 ReactDOM.render(
   <Provider>
@@ -46,6 +49,7 @@ ReactDOM.render(
       <Switch>
         <Route exact path="/" component={Home} />
         <Route exact path="/tradeSearch/:searchname" component={TradeSearch} />
+        <Route exact path="/exchange" component={ExchangeApi} />
         <Redirect from="/tradeSearch" to="/tradeSearch/allTransition" />
       </Switch>
     </Layout>
