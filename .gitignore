@@ -5,3 +5,4 @@ yarn-error.log*
 build
 .vscode
 .idea
+setting.json
