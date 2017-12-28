@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { Table, Select } from 'antd';
+import axios from 'axios';
 import setting from '../../../setting.json';
 import { exchange } from '../../mock/Exchange';
 
@@ -44,6 +45,10 @@ const childColumns = [{
 export default class ExchangeApi extends PureComponent {
   state = {
     exchangeData: setting.defaultExchange,
+  }
+  async componentWillMount() {
+    const { data } = await axios.get('http://dev.btcc.com:7001/');
+    console.log(data);
   }
   _expandedRowRender = (record) => {
     const newExchange = Object.assign({}, exchange, {
