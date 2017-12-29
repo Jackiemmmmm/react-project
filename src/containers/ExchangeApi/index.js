@@ -1,9 +1,8 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { Table, Select } from 'antd';
-import axios from 'axios';
+import { getTickerApi } from 'actions/Tickers';
 import setting from '../../../setting.json';
-import { exchange } from '../../mock/Exchange';
 
 const { Option } = Select;
 
@@ -36,9 +35,11 @@ const childColumns = [{
 }];
 
 @connect(
-  null,
+  state => ({
+    exchange: state.Tickers.ticker,
+  }),
   dispatch => ({
-    _connectApi: () => dispatch({ type: 'CONNECTED' }),
+    getTicker: () => dispatch(getTickerApi()),
   }),
 )
 
@@ -47,10 +48,10 @@ export default class ExchangeApi extends PureComponent {
     exchangeData: setting.defaultExchange,
   }
   async componentWillMount() {
-    const { data } = await axios.get('http://dev.btcc.com:7001/');
-    console.log(data);
+    this.props.getTicker();
   }
   _expandedRowRender = (record) => {
+    const { exchange } = this.props;
     const newExchange = Object.assign({}, exchange, {
       [this.state.exchangeData]: [],
     });
@@ -79,6 +80,7 @@ export default class ExchangeApi extends PureComponent {
   _selectHandleChange = v => this.setState({ exchangeData: v });
 
   _exchangeData = (exchangeData) => {
+    const { exchange } = this.props;
     const data = [];
     for (let i = 0, len = exchange[exchangeData].length; i < len; i += 1) {
       exchange[exchangeData][i].key = i;
