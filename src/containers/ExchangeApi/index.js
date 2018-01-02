@@ -12,21 +12,21 @@ const columns = [{
   key: 'market',
 }, {
   title: 'Currency',
-  dataIndex: 'id',
+  dataIndex: 'trade_pair',
   key: 'currency',
 }, {
   title: 'Price',
-  dataIndex: 'last',
+  dataIndex: 'sell_one',
   key: 'price',
 }];
 
 const childColumns = [{
   title: 'Market',
-  dataIndex: 'market',
+  dataIndex: 'trade_pair',
   key: 'market',
 }, {
   title: 'Price',
-  dataIndex: 'last',
+  dataIndex: 'sell_one',
   key: 'price',
 }, {
   title: 'Change',
@@ -40,6 +40,7 @@ const childColumns = [{
   }),
   dispatch => ({
     getTicker: () => dispatch(getTickerApi()),
+    connectWS: () => dispatch({ type: 'CONNECTED' }),
   }),
 )
 
@@ -47,8 +48,9 @@ export default class ExchangeApi extends PureComponent {
   state = {
     exchangeData: setting.defaultExchange,
   }
-  async componentWillMount() {
+  componentWillMount() {
     this.props.getTicker();
+    this.props.connectWS();
   }
   _expandedRowRender = (record) => {
     const { exchange } = this.props;
@@ -81,6 +83,7 @@ export default class ExchangeApi extends PureComponent {
 
   _exchangeData = (exchangeData) => {
     const { exchange } = this.props;
+    if (Object.keys(exchange).length === 0) return [];
     const data = [];
     for (let i = 0, len = exchange[exchangeData].length; i < len; i += 1) {
       exchange[exchangeData][i].key = i;

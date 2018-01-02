@@ -5,7 +5,7 @@ import thunk from 'redux-thunk';
 import { routerReducer, routerMiddleware } from 'react-router-redux';
 import reducers from './reducers';
 import createRavenMiddleware from './createRavenMiddleware';
-import publicSocket from './middleware/poloniexSocket';
+import publicSocket from './middleware/publicSocket';
 
 const prod = process.env.ENV === 'prod';
 const RAVEN_DSN = 'http://9cda3aff14d3424e942c870f60022e4c@10.0.22.42:9000/2';
