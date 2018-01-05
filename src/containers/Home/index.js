@@ -11,7 +11,7 @@ let forceRerender = 0;
 
 @connect(
   state => ({
-    test: state.Home.test,
+    test: state.Home.get('test'),
   }),
   dispatch => ({
     _getTest: () => dispatch(demoTest()),

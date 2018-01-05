@@ -1,9 +1,10 @@
 const webpack = require('webpack');
-const { resolve } = require('path');
+const { resolve, join } = require('path');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const { getIfUtils, removeEmpty } = require('webpack-config-utils');
 // const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const ClosureCompilerPlugin = require('webpack-closure-compiler');
+const ServiceWorkerWebpackPlugin = require('serviceworker-webpack-plugin');
 
 const { ifProduction } = getIfUtils(process.env.NODE_ENV); // , ifNotProduction
 
@@ -135,6 +136,9 @@ module.exports = {
         language_out: 'ECMASCRIPT5_STRICT',
       },
     })),
+    new ServiceWorkerWebpackPlugin({
+      entry: join(__dirname, 'src/sw.js'),
+    }),
     // new webpack.optimize.ModuleConcatenationPlugin(),
     antdCSS,
     extractCSS,

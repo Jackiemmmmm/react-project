@@ -28,7 +28,7 @@ module.exports = Object.assign(baseConfig, {
       inject: false,
       minify: {
         removeAttributeQuotes: true,
-        removeComments: true,
+        // removeComments: true,
         collapseWhitespace: true,
         minifyCSS: true,
         minifyJS: source => (
