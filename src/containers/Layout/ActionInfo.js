@@ -7,7 +7,7 @@ import styles from './styles.css';
 
 @connect(
   state => ({
-    locale: state.Intl.locale,
+    locale: state.Intl.get('locale'),
   }),
   dispatch => ({
     _changeLang: locale => dispatch(changeLang(locale)),

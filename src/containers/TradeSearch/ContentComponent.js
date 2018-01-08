@@ -4,7 +4,7 @@ import FormComponent from './FormComponent';
 import TableComponent from './TableComponent';
 
 @connect(state => ({
-  locale: state.Intl.locale,
+  locale: state.Intl.get('locale'),
 }))
 
 export default class ContentComponent extends PureComponent {

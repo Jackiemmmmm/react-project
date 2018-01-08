@@ -6,11 +6,7 @@ const defaultValue = fromJS({
 const Home = (state = defaultValue, action) => {
   switch (action.type) {
     case 'TEST':
-      // return {
-      //   ...state,
-      //   test: action.test,
-      // };
-      return state.update('test', 'immutable', v => v);
+      return state.merge(fromJS({ test: action.test }));
     case 'CRUSH_IN_THE_REDUCER':
       throw new Error('Crash Test send');
     default:
