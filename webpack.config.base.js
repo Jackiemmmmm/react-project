@@ -1,7 +1,7 @@
 const webpack = require('webpack');
 const { resolve } = require('path');
 const { compile } = require('google-closure-compiler-js');
-const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
+// const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const HtmlwebpackPlugin = require('html-webpack-plugin');
 
 const ROOT_PATH = resolve(__dirname);
@@ -45,10 +45,6 @@ exports.lessExtract = {
 exports.baseConfig = {
   entry: {
     vendor: [
-      'react',
-      'react-dom',
-      'react-router',
-      'react-router-dom',
       BASE_PATH,
     ],
   },
@@ -119,9 +115,29 @@ exports.baseConfig = {
             compile({ jsCode: [{ src: source }] }).compiledCode :
             ''
         ),
+        removeRedundantAttributes: true,
+        useShortDoctype: true,
+        removeEmptyAttributes: true,
+        removeStyleLinkTypeAttributes: true,
+        keepClosingSlash: true,
+        minifyURLs: true,
       },
     }),
-    new BundleAnalyzerPlugin(),
+    new webpack.optimize.CommonsChunkPlugin({
+      async: 'common-in-antd',
+      minChunks: ({ resource } = {}) => (
+        resource &&
+        resource.includes('node_modules') &&
+        /antd/.test(resource)
+      ),
+    }),
+    new webpack.optimize.CommonsChunkPlugin({
+      async: 'multiple-component',
+      minChunks: (module, count) => (
+        count >= 2
+      ),
+    }),
+    // new BundleAnalyzerPlugin(),
   ],
   devServer: {
     contentBase: BASE_PATH,
