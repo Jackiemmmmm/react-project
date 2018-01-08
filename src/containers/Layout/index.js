@@ -20,8 +20,8 @@ const list = [
 ];
 
 @connect(state => ({
-  locale: state.Intl.locale,
-  antd: state.Intl.antd,
+  locale: state.Intl.get('locale'),
+  antd: state.Intl.get('antd').toJS(),
 }))
 
 class LayoutComponent extends PureComponent {

@@ -12,7 +12,7 @@ let forceRerender = 0;
 @Form.create()
 
 @connect(state => ({
-  locale: state.Intl.locale,
+  locale: state.Intl.get('locale'),
 }))
 
 export default class FormComponent extends PureComponent {

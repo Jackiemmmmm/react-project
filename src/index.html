@@ -16,7 +16,6 @@
   <meta name="format-detection" content="telephone=no">
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
-  <!--confirm the lastest internet explorer-->
   <meta http-equiv="Cache-Control" content="no-siteapp" />
   <meta name="MobileOptimized" content="320">
   <meta name="x5-orientation" content="portrait">
@@ -31,6 +30,25 @@
 </head>
 
 <body>
+  <!--[if lt IE9]>
+  <div class="ie-must-die">
+    <div class="ie-container">
+      <h1>
+        您正在使用IE
+      </h1>
+      <p>
+        但IE毕竟已然老去，早已无法适应这个绚丽的时代。
+        <br />
+        他的职责既已完成，不如就任其安然睡去吧——
+        <br />
+        毕竟，这个时代是属于现代浏览器的。
+      </p>
+      <a href="https://browsehappy.com" target="_blank">
+        您可以点击此处，下载Chrome后再次打开本页面。
+      </a>
+    </div>
+  </div>
+  <![endif]-->
   <div id="app"></div>
   <% for (var chunk in htmlWebpackPlugin.files.chunks) { %>
     <script src="<%= htmlWebpackPlugin.files.chunks[chunk].entry %>"></script>

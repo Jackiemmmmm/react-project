@@ -1,3 +1,4 @@
+import { fromJS } from 'immutable';
 import antdEn from 'antd/lib/locale-provider/en_US';
 import antdCn from 'antd/lib/locale-provider/zh_CN';
 
@@ -12,19 +13,19 @@ const checkLanguage = () => {
   return 'en';
 };
 
-const defaultState = {
+const defaultState = fromJS({
   locale: localStorage.getItem('mobi_lang') || checkLanguage(),
   antd: arr[localStorage.getItem('mobi_lang') || checkLanguage()],
-};
+});
 
 const Intl = (state = defaultState, action) => {
   switch (action.type) {
     case 'LOCALE':
-      return {
-        ...state,
-        locale: action.locale,
-        antd: arr[action.locale],
-      };
+      return state
+        .merge(fromJS({
+          locale: action.locale,
+          antd: arr[action.locale],
+        }));
     default:
       return state;
   }

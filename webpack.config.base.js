@@ -1,23 +1,15 @@
 const webpack = require('webpack');
 const { resolve } = require('path');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const { getIfUtils, removeEmpty } = require('webpack-config-utils');
-// const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
-const ClosureCompilerPlugin = require('webpack-closure-compiler');
+const { compile } = require('google-closure-compiler-js');
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
+const HtmlwebpackPlugin = require('html-webpack-plugin');
 
-const { ifProduction } = getIfUtils(process.env.NODE_ENV); // , ifNotProduction
+const ROOT_PATH = resolve(__dirname);
+const BASE_PATH = resolve(ROOT_PATH, 'src');
+const BUILD_PATH = resolve(ROOT_PATH, 'build');
 
-const extractCSS = new ExtractTextPlugin({
-  filename: ifProduction('assets/bundle.css?v=[contenthash:5]', 'assets/bundle.css'),
-  allChunks: true,
-  disable: false,
-});
-const antdCSS = new ExtractTextPlugin({
-  filename: ifProduction('assets/antd.css?v=[contenthash:5]', 'assets/antd.css'),
-  allChunks: true,
-  disable: false,
-});
-const commonExtract = {
+
+exports.commonExtract = {
   fallback: 'style-loader',
   use: [
     {
@@ -33,8 +25,7 @@ const commonExtract = {
     'postcss-loader',
   ],
 };
-
-const lessExtract = {
+exports.lessExtract = {
   fallback: 'style-loader',
   use: [
     {
@@ -51,23 +42,22 @@ const lessExtract = {
   ],
 };
 
-module.exports = {
-  devtool: ifProduction(false, 'source-map'),
+exports.baseConfig = {
+  entry: {
+    vendor: [
+      'react',
+      'react-dom',
+      'react-router',
+      'react-router-dom',
+      BASE_PATH,
+    ],
+  },
   output: {
-    filename: ifProduction('assets/[name].bundle.js?v=[hash:5]', '[name].bundle.js'),
-    chunkFilename: ifProduction('assets/[id].chunk.js?v=[chunkhash:5]', '[name].chunk.js'),
+    publicPath: '/',
+    path: BUILD_PATH,
   },
   module: {
     rules: [
-      {
-        test: /\.less$/,
-        use: antdCSS.extract(lessExtract),
-      },
-      {
-        test: /\.css$/,
-        exclude: /node_modules/,
-        use: extractCSS.extract(commonExtract),
-      },
       {
         test: /\.(ttf|eot|otf|svg|woff(2)?)(\?[a-z0-9]+)?$/,
         include: resolve('src/fonts'),
@@ -75,14 +65,6 @@ module.exports = {
         options: {
           limit: 1024,
           name: 'fonts/[name].[ext]',
-        },
-      },
-      {
-        test: /\.(ico|png|mp3|wav|jpg|svg)$/,
-        loader: 'url-loader',
-        options: {
-          limit: 10240,
-          name: ifProduction('images/[name].[ext]?v=[hash:5]', 'images/[name].[ext]'),
         },
       },
       {
@@ -117,27 +99,38 @@ module.exports = {
     ],
     extensions: ['.js', '.jsx', '.json'],
   },
-  plugins: removeEmpty([
+  plugins: [
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: JSON.stringify(process.env.NODE_ENV || 'development'),
       },
     }),
-    new webpack.optimize.CommonsChunkPlugin({
-      name: 'vendor',
-      filename: ifProduction('assets/vendor.bundle.js?v=[hash:5]', 'vendor.bundle.js'),
-    }),
-    ifProduction(new ClosureCompilerPlugin({
-      compiler: {
-        charset: 'utf-8',
-        create_source_map: true,
-        language_in: 'ECMASCRIPT5_STRICT',
-        language_out: 'ECMASCRIPT5_STRICT',
+    new HtmlwebpackPlugin({
+      template: 'src/index.html',
+      chunks: ['vendor'],
+      inject: false,
+      minify: {
+        removeAttributeQuotes: true,
+        // removeComments: true,
+        collapseWhitespace: true,
+        minifyCSS: true,
+        minifyJS: source => (
+          source ?
+            compile({ jsCode: [{ src: source }] }).compiledCode :
+            ''
+        ),
       },
-    })),
-    // new webpack.optimize.ModuleConcatenationPlugin(),
-    antdCSS,
-    extractCSS,
-    // new BundleAnalyzerPlugin(),
-  ]),
+    }),
+    new BundleAnalyzerPlugin(),
+  ],
+  devServer: {
+    contentBase: BASE_PATH,
+    disableHostCheck: true,
+    compress: true,
+    port: 3001,
+    host: '0.0.0.0',
+    historyApiFallback: {
+      disableDotRule: true,
+    },
+  },
 };

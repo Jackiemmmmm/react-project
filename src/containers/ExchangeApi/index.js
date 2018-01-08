@@ -41,6 +41,7 @@ const childColumns = [{
   dispatch => ({
     getTicker: () => dispatch(getTickerApi()),
     connectWS: () => dispatch({ type: 'CONNECTED' }),
+    disconnectWS: () => dispatch({ type: 'DISCONNECT' }),
   }),
 )
 
@@ -51,6 +52,9 @@ export default class ExchangeApi extends PureComponent {
   componentWillMount() {
     this.props.getTicker();
     this.props.connectWS();
+  }
+  componentWillUnmount() {
+    this.props.disconnectWS();
   }
   _expandedRowRender = (record) => {
     const { exchange } = this.props;

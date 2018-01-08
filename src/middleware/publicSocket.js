@@ -13,8 +13,9 @@ const onMessage = (ws, store) => (evt) => {
   store.dispatch(globalWS(msg));
 };
 
+let socket = null;
+
 const poloniexSocket = store => next => (action) => {
-  let socket = null;
   switch (action.type) {
     case 'CONNECTED':
       if (socket != null) {
@@ -24,6 +25,9 @@ const poloniexSocket = store => next => (action) => {
       socket.onmessage = onMessage(socket, store);
       socket.onerror = onError(socket, store);
       socket.onopen = onOpen(socket, store);
+      break;
+    case 'DISCONNECT':
+      socket.close();
       break;
     default:
       return next(action);

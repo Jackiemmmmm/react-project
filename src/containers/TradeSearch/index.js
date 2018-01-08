@@ -13,7 +13,7 @@ const {
 const list = ['allTransition', 'mobiTransition', 'onchainTransition', 'cardTransition'];
 
 @connect(state => ({
-  locale: state.Intl.locale,
+  locale: state.Intl.get('locale'),
 }))
 
 

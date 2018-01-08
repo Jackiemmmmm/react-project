@@ -50,7 +50,6 @@ const columns = [{
 
 @connect(
   state => ({
-    locale: state.Intl.locale,
     data: state.Table.tableList,
     loading: state.Table.loading,
   }),
