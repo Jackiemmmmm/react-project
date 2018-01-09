@@ -27,7 +27,7 @@ module.exports = Object.assign({}, baseConfig, {
       },
       {
         test: /\.css$/,
-        exclude: /node_modules/,
+        exclude: ['node_modules'],
         use: extractCSS.extract(commonExtract),
       },
       {
