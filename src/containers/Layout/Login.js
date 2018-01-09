@@ -1,5 +1,4 @@
 import React, { PureComponent } from 'react';
-import { Button } from 'antd';
 import styles from './styles.css';
 
 export default class Login extends PureComponent {
@@ -11,7 +10,7 @@ export default class Login extends PureComponent {
     return (
       <div className={styles.loginComponent}>
         Please Login in
-        <Button onClick={login}>Login</Button>
+        <button onClick={login}>Login</button>
       </div>
     );
   }

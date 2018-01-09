@@ -6,9 +6,9 @@ import { routerReducer, routerMiddleware } from 'react-router-redux';
 import reducers from './reducers';
 import createRavenMiddleware from './createRavenMiddleware';
 import publicSocket from './middleware/publicSocket';
+import { RAVEN_DSN } from '../setting.json';
 
 const prod = process.env.ENV === 'prod';
-const RAVEN_DSN = 'http://9cda3aff14d3424e942c870f60022e4c@10.0.22.42:9000/2';
 
 const create = (typeof window !== 'undefined' && window.devToolsExtension)
   ? window.devToolsExtension({ actionsBlacklist: ['@@redux-form'] })(createStore)
@@ -19,7 +19,7 @@ export const history = createBrowserHistory();
 const middleware = routerMiddleware(history);
 
 let newMiddleware = applyMiddleware(thunk, middleware, publicSocket);
-if (prod) {
+if (prod && RAVEN_DSN) {
   Raven.config(RAVEN_DSN).install();
   newMiddleware = applyMiddleware(
     thunk,

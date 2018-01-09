@@ -1,14 +1,9 @@
-const { baseConfig, commonExtract, lessExtract } = require('./webpack.config.base');
+const { baseConfig, commonExtract } = require('./webpack.config.base');
 const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 const extractCSS = new ExtractTextPlugin({
   filename: 'assets/bundle.css',
-  allChunks: true,
-  disable: false,
-});
-const antdCSS = new ExtractTextPlugin({
-  filename: 'assets/antd.css',
   allChunks: true,
   disable: false,
 });
@@ -21,10 +16,6 @@ module.exports = Object.assign({}, baseConfig, {
   }),
   module: Object.assign({}, baseConfig.module, {
     rules: baseConfig.module.rules.concat([
-      {
-        test: /\.less$/,
-        use: antdCSS.extract(lessExtract),
-      },
       {
         test: /\.css$/,
         exclude: ['node_modules'],
@@ -45,7 +36,6 @@ module.exports = Object.assign({}, baseConfig, {
       name: 'vendor',
       filename: 'vendor.bundle.js',
     }),
-    antdCSS,
     extractCSS,
   ]),
 });

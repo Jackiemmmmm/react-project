@@ -1,4 +1,4 @@
-const { baseConfig, commonExtract, lessExtract } = require('./webpack.config.base');
+const { baseConfig, commonExtract } = require('./webpack.config.base');
 const ClosureCompilerPlugin = require('webpack-closure-compiler');
 const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
@@ -6,11 +6,6 @@ const OfflinePlugin = require('offline-plugin');
 
 const extractCSS = new ExtractTextPlugin({
   filename: 'assets/bundle.css?v=[contenthash:5]',
-  allChunks: true,
-  disable: false,
-});
-const antdCSS = new ExtractTextPlugin({
-  filename: 'assets/antd.css?v=[contenthash:5]',
   allChunks: true,
   disable: false,
 });
@@ -23,10 +18,6 @@ module.exports = Object.assign({}, baseConfig, {
   }),
   module: Object.assign({}, baseConfig.module, {
     rules: baseConfig.module.rules.concat([
-      {
-        test: /\.less$/,
-        use: antdCSS.extract(lessExtract),
-      },
       {
         test: /\.css$/,
         exclude: ['node_modules'],
@@ -55,7 +46,6 @@ module.exports = Object.assign({}, baseConfig, {
         language_out: 'ECMASCRIPT5_STRICT',
       },
     }),
-    antdCSS,
     extractCSS,
     new OfflinePlugin({
       appShell: '/',

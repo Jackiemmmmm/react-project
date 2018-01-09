@@ -25,22 +25,6 @@ exports.commonExtract = {
     'postcss-loader',
   ],
 };
-exports.lessExtract = {
-  fallback: 'style-loader',
-  use: [
-    {
-      loader: 'css-loader',
-      options: {
-        modules: true,
-        sourceMap: true,
-        minimize: true,
-        importLoaders: 1,
-        localIdentName: '[local]',
-      },
-    },
-    'less-loader',
-  ],
-};
 
 exports.baseConfig = {
   entry: {
@@ -122,14 +106,6 @@ exports.baseConfig = {
         keepClosingSlash: true,
         minifyURLs: true,
       },
-    }),
-    new webpack.optimize.CommonsChunkPlugin({
-      async: 'common-in-antd',
-      minChunks: ({ resource } = {}) => (
-        resource &&
-        resource.includes('node_modules') &&
-        /antd/.test(resource)
-      ),
     }),
     new webpack.optimize.CommonsChunkPlugin({
       async: 'multiple-component',

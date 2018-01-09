@@ -1,8 +1,5 @@
 import { fromJS } from 'immutable';
-import antdEn from 'antd/lib/locale-provider/en_US';
-import antdCn from 'antd/lib/locale-provider/zh_CN';
 
-const arr = { zh: antdCn, en: antdEn };
 const checkLanguage = () => {
   const lang = window.navigator.language.toLowerCase();
   if (lang.indexOf('zh') >= 0) {
@@ -15,7 +12,6 @@ const checkLanguage = () => {
 
 const defaultState = fromJS({
   locale: localStorage.getItem('mobi_lang') || checkLanguage(),
-  antd: arr[localStorage.getItem('mobi_lang') || checkLanguage()],
 });
 
 const Intl = (state = defaultState, action) => {
@@ -24,7 +20,6 @@ const Intl = (state = defaultState, action) => {
       return state
         .merge(fromJS({
           locale: action.locale,
-          antd: arr[action.locale],
         }));
     default:
       return state;

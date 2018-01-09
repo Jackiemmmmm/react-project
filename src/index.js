@@ -3,7 +3,6 @@ import React from 'react';
 import {
   Route,
   Switch,
-  Redirect,
 } from 'react-router-dom';
 // import NoMatch from 'containers/NoMatch';
 import Layout from 'containers/Layout';
@@ -36,21 +35,12 @@ const asyncComponent = getComponent => (
 const Home = asyncComponent(() => (
   System.import(/* webpackChunkName: "Home" */'containers/Home').then(module => module.default)
 ));
-const TradeSearch = asyncComponent(() => (
-  System.import(/* webpackChunkName: "TradeSearch" */'containers/TradeSearch').then(module => module.default)
-));
-const ExchangeApi = asyncComponent(() => (
-  System.import(/* webpackChunkName: "ExchangeApi" */'containers/ExchangeApi').then(module => module.default)
-));
 
 ReactDOM.render(
   <Provider>
     <Layout>
       <Switch>
         <Route exact path="/" component={Home} />
-        <Route exact path="/tradeSearch/:searchname" component={TradeSearch} />
-        <Route exact path="/exchange" component={ExchangeApi} />
-        <Redirect from="/tradeSearch" to="/tradeSearch/allTransition" />
       </Switch>
     </Layout>
   </Provider>,
