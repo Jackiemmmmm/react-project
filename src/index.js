@@ -4,8 +4,8 @@ import {
   Route,
   Switch,
 } from 'react-router-dom';
-// import NoMatch from 'containers/NoMatch';
-import Layout from 'containers/Layout';
+import NoMatch from 'containers/NoMatch';
+// import Layout from 'containers/Layout';
 import Provider from './provider';
 
 const asyncComponent = getComponent => (
@@ -38,11 +38,10 @@ const Home = asyncComponent(() => (
 
 ReactDOM.render(
   <Provider>
-    <Layout>
-      <Switch>
-        <Route exact path="/" component={Home} />
-      </Switch>
-    </Layout>
+    <Switch>
+      <Route exact path="/" component={Home} />
+      <Route component={NoMatch} />
+    </Switch>
   </Provider>,
   document.getElementById('app'),
 );

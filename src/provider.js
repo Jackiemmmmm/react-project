@@ -1,18 +1,27 @@
 import React from 'react';
-import { Provider } from 'react-redux';
-import { ConnectedRouter } from 'react-router-redux';
+import { Provider, connect } from 'react-redux';
 import en from 'react-intl/locale-data/en';
 import zh from 'react-intl/locale-data/zh';
-import { addLocaleData } from 'react-intl';
+import { addLocaleData, IntlProvider } from 'react-intl';
+import { Router } from 'react-router-dom';
 import { store, history } from './store';
 
 addLocaleData([...en, ...zh]);
 
+
+const mapStateToProps = state => ({
+  locale: state.Intl.locale,
+});
+
+const ConnectIntlProvider = connect(mapStateToProps)(IntlProvider);
+
 const ProviderWrapper = ({ children }) => (
   <Provider store={store}>
-    <ConnectedRouter history={history}>
-      {children}
-    </ConnectedRouter>
+    <ConnectIntlProvider>
+      <Router history={history}>
+        {children}
+      </Router>
+    </ConnectIntlProvider>
   </Provider>
 );
 

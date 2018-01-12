@@ -5,8 +5,14 @@ class NoMatch extends PureComponent {
     time: 3,
   }
   componentWillMount() {
+    for (let i = 1; i < 4; i += 1) {
+      setTimeout(() => {
+        const { time } = this.state;
+        this.setState({ time: time - 1 });
+      }, i * 1000);
+    }
     setTimeout(() => {
-      this.props.history.goBack();
+      this.props.history.replace('/');
     }, 3000);
   }
   render() {

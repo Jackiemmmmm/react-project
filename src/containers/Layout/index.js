@@ -1,6 +1,5 @@
 import React, { PureComponent } from 'react';
 import { IntlProvider } from 'react-intl';
-import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
 import Login from './Login';
 import messages from './messages';
@@ -9,7 +8,7 @@ import messages from './messages';
   locale: state.Intl.get('locale'),
 }))
 
-class LayoutComponent extends PureComponent {
+export default class LayoutComponent extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
@@ -19,8 +18,6 @@ class LayoutComponent extends PureComponent {
   componentWillMount() {
     this.setState({ isLogin: localStorage.getItem('isLogin') });
   }
-  _handleClick = e => this.props.history.push(e.key);
-
   _login = () => {
     localStorage.setItem('isLogin', true);
     this.setState({ isLogin: true });
@@ -42,5 +39,3 @@ class LayoutComponent extends PureComponent {
     );
   }
 }
-
-export default withRouter(LayoutComponent);
