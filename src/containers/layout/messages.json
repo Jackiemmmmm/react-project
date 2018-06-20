@@ -1,0 +1,18 @@
+{
+  "zh": {
+    "home": "主页",
+    "tradeSearch": "交易查询",
+    "allTransition": "全部交易",
+    "mobiTransition": "Mobi 交易",
+    "onchainTransition": "Onchain 交易",
+    "cardTransition": "预付卡交易"
+  },
+  "en": {
+    "home": "Home",
+    "tradeSearch": "Transition Search",
+    "allTransition": "All Transition",
+    "mobiTransition": "Mobi Transition",
+    "onchainTransition": "Onchain Transition",
+    "cardTransition": "Card Transition"
+  }
+}

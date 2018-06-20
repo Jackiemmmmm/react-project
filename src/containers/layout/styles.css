@@ -1,0 +1,26 @@
+.layout {
+  height: 100vh;
+}
+.sider {
+  .logo {
+    width: 30px;
+    height: 30px;
+    background-color: white;
+    margin: 20px auto;
+  }
+  .menu {
+    line-height: 64px;
+  }
+}
+
+.layout_header {
+  display: flex;
+  align-items: center;
+  background-color: white;
+  .layout_breadcrumb {
+    flex: 1;
+  }
+}
+.language_menu {
+  min-width: 80px;
+}

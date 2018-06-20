@@ -1,0 +1,23 @@
+.transition_content {
+  padding: 20px;
+  .transition_layout {
+    padding: 24px 0;
+    background: #ffffff;
+  }
+  .sider {
+    margin-right: 20px;
+    background-color: #ffffff;
+  }
+}
+
+.tableComponent {
+  .ant-table table {
+    border: 1px solid #f4f4f4;
+    border-width: 0 1px 1px 0;
+  }
+  .ant-table-tbody>tr>td, .ant-table-thead>tr>th {
+    padding: 5px;
+    border: 1px solid #f4f4f4;
+    border-width: 1px 0 0 1px;
+  }
+}
