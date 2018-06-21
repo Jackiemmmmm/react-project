@@ -49,12 +49,14 @@ const asyncComponent = getComponent => props => (
 
 const Home = asyncComponent(() => import(/* webpackChunkName: "Asset" */'containers/home').then(module => module.default));
 const TradeSearch = asyncComponent(() => import(/* webpackChunkName: "Trade" */'containers/trade-search').then(module => module.default));
+const Mobx = asyncComponent(() => import(/* webpackChunkName: "Mobx" */'containers/mobx').then(module => module.default));
 
 const App = () => (
   <Layout>
     <Switch>
       <Route exact path="/" component={Home} />
       <Route exact path="/tradeSearch/:searchname" component={TradeSearch} />
+      <Route exact path="/mobx" component={Mobx} />
       <Redirect from="/tradeSearch" to="/tradeSearch/allTransition" />
     </Switch>
   </Layout>
