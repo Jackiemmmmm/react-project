@@ -8,7 +8,6 @@
 // import 'babel-polyfill';
 import ReactDOM from 'react-dom';
 import React from 'react';
-import Provider from './provider';
 import App from './app';
 
 const isIE = !!window.ActiveXObject || 'ActiveXObject' in window;
@@ -36,9 +35,7 @@ ReactDOM.render(
         </div>
       </div>
       :
-      <Provider>
-        <App />
-      </Provider>
+      <App />
   ),
   document.getElementById('app'),
 );

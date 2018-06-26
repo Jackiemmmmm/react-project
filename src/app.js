@@ -2,12 +2,12 @@ import React from 'react';
 import {
   Route,
   Switch,
-  Redirect,
+  Router,
 } from 'react-router-dom';
 import { hot } from 'react-hot-loader';
+import { createBrowserHistory } from 'history';
 import NoMatch from 'containers/no-match';
 import Loading from 'components/loading';
-import Layout from 'containers/layout';
 // import 'common/common.css';
 
 class AsyncComponent extends React.Component {
@@ -47,19 +47,17 @@ const asyncComponent = getComponent => props => (
   <AsyncComponent getComponent={getComponent} {...props} />
 );
 
+export const history = createBrowserHistory();
+
 const Home = asyncComponent(() => import(/* webpackChunkName: "Asset" */'containers/home').then(module => module.default));
-const TradeSearch = asyncComponent(() => import(/* webpackChunkName: "Trade" */'containers/trade-search').then(module => module.default));
-const Mobx = asyncComponent(() => import(/* webpackChunkName: "Mobx" */'containers/mobx').then(module => module.default));
 
 const App = () => (
-  <Layout>
+  <Router history={history}>
     <Switch>
       <Route exact path="/" component={Home} />
-      <Route exact path="/tradeSearch/:searchname" component={TradeSearch} />
-      <Route exact path="/mobx" component={Mobx} />
-      <Redirect from="/tradeSearch" to="/tradeSearch/allTransition" />
+      <Route exact path="*" component={NoMatch} />
     </Switch>
-  </Layout>
+  </Router>
 );
 
 export default hot(module)(App);
