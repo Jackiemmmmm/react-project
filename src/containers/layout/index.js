@@ -16,6 +16,7 @@ const {
 const list = [
   { key: '/', icon: 'user', id: 'home' },
   { key: '/tradeSearch', icon: 'desktop', id: 'tradeSearch' },
+  { key: '/mobx', icon: 'desktop', id: 'mobx' },
 ];
 
 @connect(state => ({

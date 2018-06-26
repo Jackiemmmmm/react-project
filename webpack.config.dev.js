@@ -3,7 +3,7 @@ const HardSourceWebpackPlugin = require('hard-source-webpack-plugin');
 
 module.exports = Object.assign({}, baseConfig, {
   mode: 'development',
-  devtool: 'source-map',
+  devtool: 'inline-source-map',
   output: Object.assign({}, baseConfig.output, {
     filename: 'assets/[name].bundle.js',
     chunkFilename: 'assets/[name].chunk.js',

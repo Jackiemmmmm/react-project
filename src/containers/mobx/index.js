@@ -1,22 +1,27 @@
-import React, { PureComponent } from 'react';
-import { observable, computed } from 'react-mobx';
-import TodoListView from './todo-list-view';
+import React from 'react';
 
-class TodoList {
-  @observable todos = [];
-  @computed get unfinishedTodoCount() {
-    return this.todos.filter(todo => !todo.finished).length;
-  }
-}
+import TodoList from './components/TodoList';
+import TodoListModel from './models/TodoListModel';
+
+const store = new TodoListModel();
+
+store.addTodo('Get Coffee');
+store.addTodo('Write simpler code');
+store.todos[0].finished = true;
+
+setTimeout(() => {
+  store.addTodo('Get a cookie as well');
+}, 2000);
+
+// playing around in the console
 
 
-const store = new TodoList();
-
-export default class MobxDemo extends PureComponent {
+export default class MobxDemo extends React.PureComponent {
   render() {
     return (
       <div>
-        <TodoListView todoList={store} />
+        test
+        <TodoList store={store} />
       </div>
     );
   }
