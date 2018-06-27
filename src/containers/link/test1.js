@@ -5,7 +5,8 @@ export default class Test1 extends PureComponent {
     const { match: { params: { id } } } = this.props;
     return (
       <div>
-        Test1 ___ {id}
+        Test1 ___
+        {id}
       </div>
     );
   }

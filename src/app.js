@@ -12,20 +12,25 @@ import Loading from 'components/loading';
 
 class AsyncComponent extends React.Component {
   static Component = null;
+
   constructor(props) {
     super(props);
     this.state = { Component: null };
   }
+
   componentWillMount() {
-    if (!this.state.Component) {
+    const { Component } = this.state;
+    if (!Component) {
       this._rerenderComponent();
     }
   }
+
   componentWillReceiveProps() {
     if (module.hot) {
       setImmediate(() => this._rerenderComponent());
     }
   }
+
   _rerenderComponent() {
     const { getComponent } = this.props;
     return getComponent().then((Component) => {
@@ -34,6 +39,7 @@ class AsyncComponent extends React.Component {
       this.setState({ Component: NoMatch });
     });
   }
+
   render() {
     const { Component } = this.state;
     if (Component) {

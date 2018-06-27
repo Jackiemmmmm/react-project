@@ -9,9 +9,15 @@ export default class Home extends PureComponent {
       <div className={styles.test}>
         Home
         <br />
-        Link Demo: <Link to="/link-test">Link test page</Link>
+        Link Demo:
+        <Link to="/link-test">
+          Link test page
+        </Link>
         <br />
-        Mobx Demo: <Link to="/mobx-test">Mobx test Page</Link>
+        Mobx Demo:
+        <Link to="/mobx-test">
+          Mobx test Page
+        </Link>
         <br />
       </div>
     );

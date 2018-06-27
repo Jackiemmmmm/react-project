@@ -4,17 +4,21 @@ class NoMatch extends PureComponent {
   state = {
     time: 3,
   }
+
   componentWillMount() {
+    const { history } = this.props;
     setTimeout(() => {
-      this.props.history.goBack();
+      history.goBack();
     }, 3000);
   }
+
   render() {
+    const { time } = this.state;
     return (
       <div>
         404
         <br />
-        {`${this.state.time}s later will go back`}
+        {`${time}s later will go back`}
       </div>
     );
   }

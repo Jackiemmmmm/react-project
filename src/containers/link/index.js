@@ -7,11 +7,15 @@ export default class LinkTest extends PureComponent {
     const { match: { path } } = this.props;
     return (
       <div>
-        <Link replace to="/">Back Button</Link>
+        <Link replace to="/">
+          Back Button
+        </Link>
         <br />
         Link page
         <br />
-        <Link to={`${path}/test1`}>Show Test1 Page</Link>
+        <Link to={`${path}/test1`}>
+          Show Test1 Page
+        </Link>
         <br />
         <Route exact path={`${path}/:id`} component={Test1} />
       </div>

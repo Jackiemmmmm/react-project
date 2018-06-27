@@ -5,7 +5,9 @@ export default class MobxDemo extends PureComponent {
   render() {
     return (
       <div>
-        <Link replace to="/">Back Button</Link>
+        <Link replace to="/">
+          Back Button
+        </Link>
         <br />
         Mobx Demo
       </div>
