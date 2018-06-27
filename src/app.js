@@ -49,12 +49,14 @@ const asyncComponent = getComponent => props => (
 
 export const history = createBrowserHistory();
 
-const Home = asyncComponent(() => import(/* webpackChunkName: "Asset" */'containers/home').then(module => module.default));
+const Home = asyncComponent(() => import(/* webpackChunkName: "Home" */'containers/home').then(module => module.default));
+const LinkTest = asyncComponent(() => import(/* webpackChunkName: "Link" */'containers/link').then(module => module.default));
 
 const App = () => (
   <Router history={history}>
     <Switch>
       <Route exact path="/" component={Home} />
+      <Route path="/link-test" component={LinkTest} />
       <Route exact path="*" component={NoMatch} />
     </Switch>
   </Router>
