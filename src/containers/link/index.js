@@ -4,10 +4,11 @@ import Test1 from './test1';
 
 export default class LinkTest extends PureComponent {
   render() {
-    console.log(this.props);
     const { match: { path } } = this.props;
     return (
       <div>
+        <Link replace to="/">Back Button</Link>
+        <br />
         Link page
         <br />
         <Link to={`${path}/test1`}>Show Test1 Page</Link>
