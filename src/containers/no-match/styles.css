@@ -1,0 +1,140 @@
+$bgColor: #f7f7f7;
+$jaggedDistance: 32px;
+
+$booSize: calc($jaggedDistance * 5);
+$booBg: $bgColor;
+
+$booFaceSize: calc($jaggedDistance / 1.3333);
+$booFaceColor: #9b9b9b;
+
+@keyframes floating {
+	0% {
+		transform: translate3d(0, 0, 0);	
+	}
+	45%, 55% {
+		transform: translate3d(0, -10%, 0);	
+	}
+	100% {
+		transform: translate3d(0, 0, 0);
+	}			
+}
+
+@keyframes floatingShadow {
+	0% {
+		transform: scale(1);	
+	}
+	45%, 55% {
+		transform: scale(.85);	
+	}
+	100% {
+		transform: scale(1);
+	}			
+}
+
+
+@mixin border-bottom-jagged($size, $color-outer) {
+  position: relative;
+  padding-bottom: $size; 
+
+  &::after {
+    content: '';
+    display: block;
+    position: absolute;
+    left: -calc($size / 1.7);
+    bottom: -calc($jaggedDistance / 3.85);
+    width: calc(100% + #{$size});
+    height: $size;
+    background-repeat: repeat-x;
+    background-size: $size $size;
+    background-position: left bottom;
+    background-image: linear-gradient(-45deg, $color-outer calc($size / 2), transparent 0),
+                      linear-gradient(45deg, $color-outer calc($size / 2), transparent 0),
+                      linear-gradient(-45deg, $booFaceColor calc($size / 1.7), transparent 0),
+                      linear-gradient(45deg, $booFaceColor calc($size / 1.7), transparent 0);
+  }
+}
+
+body {
+  background-color: $bgColor;
+}
+
+.container {
+  font-family: 'Varela Round', sans-serif;
+  color: $booFaceColor;
+  position: relative;
+  height: 100vh;
+  text-align: center;
+  font-size: calc($jaggedDistance / 2);
+  
+  h1 {
+    font-size: $jaggedDistance;
+    margin-top: $jaggedDistance;
+  }
+}
+
+.boo-wrapper {
+  width: 100%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  paddig-top: calc($jaggedDistance * 2);
+  paddig-bottom: calc($jaggedDistance * 2);
+}
+
+.boo {
+  width: $booSize;
+  height: calc($booSize + calc($booSize * .15));
+  background-color: $booBg;
+  margin-left: auto;
+  margin-right: auto;
+  border: calc(calc($jaggedDistance / 1.65)  - calc($jaggedDistance /2)) solid $booFaceColor;
+  border-bottom: 0;
+  overflow: hidden;
+  border-radius: calc($booSize / 2) calc($booSize / 2) 0 0;
+  box-shadow: -calc($jaggedDistance / 2) 0 0 2px rgba(235, 235, 235, .5) inset;
+  @include border-bottom-jagged($jaggedDistance, $bgColor);
+  animation: floating 3s ease-in-out infinite;
+  box-sizing: border-box;
+  .face {
+    width: $booFaceSize;
+    height: calc($jaggedDistance / 10);
+    border-radius: 5px;
+    background-color: $booFaceColor;
+    position: absolute;
+    left: 50%;
+    bottom: calc($jaggedDistance + $booFaceSize);
+    transform: translateX(-50%);
+    
+    &::before,
+    &::after {
+      content: '';
+      display: block;
+      width: calc($booFaceSize / 4);
+      height: calc($booFaceSize / 4);
+      background-color: $booFaceColor;
+      border-radius: 50%;
+      position: absolute;
+      bottom: calc($jaggedDistance + calc($booFaceSize / 3));
+    }
+    
+    &::before {
+      left: -$booFaceSize;
+    }
+    
+    &::after {
+      right: -$booFaceSize;
+    }
+  } 
+}
+
+.shadow {
+  width: calc($booSize - $jaggedDistance);
+  height: calc($jaggedDistance / 2);
+  background-color: rgba(149, 149, 149, .75);
+  margin-top: calc($jaggedDistance * 1.25);  
+  margin-right: auto;
+  margin-left: auto;
+  border-radius: 50%;
+  animation: floatingShadow 3s ease-in-out infinite;
+}
