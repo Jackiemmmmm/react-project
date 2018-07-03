@@ -8,8 +8,8 @@ module.exports = Object.assign({}, baseConfig, {
   mode: 'production',
   devtool: false, // 'source-map',
   output: Object.assign({}, baseConfig.output, {
-    filename: 'assets/[name].bundle.js?v=[hash:5]',
-    chunkFilename: 'assets/[name].chunk.js?v=[chunkhash:5]',
+    filename: 'assets/[hash:5].bundle.js',
+    chunkFilename: 'assets/[chunkhash:5].chunk.js',
   }),
   module: Object.assign({}, baseConfig.module, {
     rules: baseConfig.module.rules.concat([

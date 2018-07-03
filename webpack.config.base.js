@@ -11,7 +11,7 @@ const BASE_PATH = resolve(ROOT_PATH, 'src');
 const BUILD_PATH = resolve(ROOT_PATH, 'build');
 
 const commonExtract = new MiniCssExtractPlugin({
-  filename: devMode ? 'assets/[name].bundle.css' : 'assets/[name].bundle.css?v=[contenthash:5]',
+  filename: devMode ? 'assets/[name].bundle.css' : 'assets/[name]_[contenthash:5].bundle.css',
   allChunks: true,
   disable: false,
 });
@@ -39,12 +39,12 @@ exports.baseConfig = {
           name: 'modules',
           chunks: 'all',
         },
-        styles: {
-          name: 'styles',
-          test: /\.css$/,
-          chunks: 'all',
-          enforce: true,
-        },
+        // styles: {
+        //   name: 'styles',
+        //   test: /\.css$/,
+        //   chunks: 'all',
+        //   enforce: true,
+        // },
       },
     },
   },
@@ -52,6 +52,7 @@ exports.baseConfig = {
     rules: [
       {
         test: /\.css$/,
+        include: resolve('src/common'),
         use: [
           devMode ? 'style-loader' : MiniCssExtractPlugin.loader,
           {
@@ -62,6 +63,24 @@ exports.baseConfig = {
               minimize: true,
               importLoaders: 1,
               localIdentName: '[local]',
+            },
+          },
+          'postcss-loader',
+        ],
+      },
+      {
+        test: /\.css$/,
+        exclude: resolve('src/common'),
+        use: [
+          devMode ? 'style-loader' : MiniCssExtractPlugin.loader,
+          {
+            loader: 'css-loader',
+            options: {
+              modules: true,
+              sourceMap: true,
+              minimize: true,
+              importLoaders: 1,
+              localIdentName: '[local]_[hash:base64:5]',
             },
           },
           'postcss-loader',
