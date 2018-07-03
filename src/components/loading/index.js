@@ -2,14 +2,14 @@ import React from 'react';
 // import styles from './styles.css';
 
 const Loading = ({ error = false, errorCallBack }) => (
-  <div>
+  <div className="dot-wrap">
     {error
       ? (
         <a onClick={errorCallBack}>
           {error}
         </a>
       )
-      : 'Loading...'}
+      : <div className="dot-overtaking" />}
   </div>
 );
 

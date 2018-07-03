@@ -1,0 +1,162 @@
+
+$dotColorHSL: hsl(0, 100%, 0%);
+$dotWidth: 10px;
+$dotHeight: 10px;
+$dotRadius: $dotWidth / 2;
+
+$dotColor: #9880ff;
+$dotBgColor: $dotColor;
+$dotBeforeColor: $dotColor;
+$dotAfterColor: $dotColor;
+
+$dotSpacing: $dotWidth + $dotWidth / 2;
+
+$value-map: ($dotWidth, $dotHeight, $dotRadius, $dotBgColor, $dotColor);
+
+@mixin dot($width, $height, $radius, $bgColor, $color) {
+	background-color: $bgColor;
+	border-radius: $radius;
+	color: $color;
+	height: $height;
+	width: $width;
+}
+
+.dot-wrap {
+  width: 100px;
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: calc(50% - 50px);
+  left: calc(50% - 50px);
+}
+
+/* monday dots */
+.dot-overtaking {
+    @include dot($dotWidth, $dotWidth, 5px, transparent, $dotColorHSL);
+    animation: dotOvertaking 2s infinite cubic-bezier(.2, .6, .8, .2);
+    box-shadow: 0 -20px 0 0;
+    // filter: blur(2px);
+    margin: -1px 0;
+    position: relative;
+    &::before,
+    &::after {
+        @include dot($dotWidth, $dotWidth, 5px, transparent, $dotColorHSL);
+        box-shadow: 0 -20px 0 0;
+        content: "";
+        // display: inline-block;
+        // filter: blur(2px);
+        left: 0;
+        position: absolute;
+        top: 0;
+    }
+    &::before { animation: dotOvertaking 2s .3s infinite cubic-bezier(.2, .6, .8, .2);  }
+    &::after  { animation: dotOvertaking 1.5s .6s infinite cubic-bezier(.2, .6, .8, .2); }
+}
+
+@keyframes dotOvertaking {
+    0%   { transform: rotateZ(0deg); }
+    100% { transform: rotateZ(360deg); }
+}
+
+/**
+$spacing: $dotWidth + 6px;
+$topPos: $spacing / 2;
+$leftPos: -9999px;
+$x1: -$leftPos - $topPos;
+$x2: -$leftPos - $topPos + $spacing;
+$y1: 0;
+$y2: -$spacing;
+
+.dot-bricks {
+    @include dot($value-map...);
+    animation: dotBricks 2s infinite ease;
+    box-shadow: $x1 $y2 0 0 $dotColor, $x1 $y1 0 0 $dotColor, $x2 $y1 0 0 $dotColor;
+    left: $leftPos;
+    position: relative;
+    top: $topPos;
+}
+
+
+@keyframes dotBricks {
+    0% {
+        box-shadow:
+            $x1 $y2 0 0 $dotColor,
+            $x1 $y1 0 0 $dotColor,
+            $x2 $y1 0 0 $dotColor;
+    }
+    8.3333% {
+        box-shadow:
+            $x2 $y2 0 0 $dotColor,
+            $x1 $y1 0 0 $dotColor,
+            $x2 $y1 0 0 $dotColor;
+    }
+    16.6667% {
+        box-shadow:
+            $x2 $y2 0 0 $dotColor,
+            $x1 $y2 0 0 $dotColor,
+            $x2 $y1 0 0 $dotColor;
+    }
+    25% {
+        box-shadow:
+            $x2 $y2 0 0 $dotColor,
+            $x1 $y2 0 0 $dotColor,
+            $x1 $y1 0 0 $dotColor;
+    }
+    33.3333% {
+        box-shadow:
+            $x2 $y1 0 0 $dotColor,
+            $x1 $y2 0 0 $dotColor,
+            $x1 $y1 0 0 $dotColor;
+    }
+    41.6667% {
+        box-shadow:
+            $x2 $y1 0 0 $dotColor,
+            $x2 $y2 0 0 $dotColor,
+            $x1 $y1 0 0 $dotColor;
+    }
+    50% {
+        box-shadow:
+            $x2 $y1 0 0 $dotColor,
+            $x2 $y2 0 0 $dotColor,
+            $x1 $y2 0 0 $dotColor;
+    }
+    58.3333% {
+        box-shadow:
+            $x1 $y1 0 0 $dotColor,
+            $x2 $y2 0 0 $dotColor,
+            $x1 $y2 0 0 $dotColor;
+    }
+    66.6667% {
+        box-shadow:
+            $x1 $y1 0 0 $dotColor,
+            $x2 $y1 0 0 $dotColor,
+            $x1 $y2 0 0 $dotColor;
+    }
+    75% {
+        box-shadow:
+            $x1 $y1 0 0 $dotColor,
+            $x2 $y1 0 0 $dotColor,
+            $x2 $y2 0 0 $dotColor;
+    }
+    83.3333% {
+        box-shadow:
+            $x1 $y2 0 0 $dotColor,
+            $x2 $y1 0 0 $dotColor,
+            $x2 $y2 0 0 $dotColor;
+    }
+    91.6667% {
+        box-shadow:
+            $x1 $y2 0 0 $dotColor,
+            $x1 $y1 0 0 $dotColor,
+            $x2 $y2 0 0 $dotColor;
+    }
+    100% {
+        box-shadow:
+            $x1 $y2 0 0 $dotColor,
+            $x1 $y1 0 0 $dotColor,
+            $x2 $y1 0 0 $dotColor;
+    }
+}
+*/

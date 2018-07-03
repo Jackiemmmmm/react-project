@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="utf-8" />
-  <title>Mobi Admin</title>
+  <title>React Project</title>
   <meta name="description" lang="en" content="" />
   <meta name="description" lang="zh" content="" />
   <meta name="keywords" content="">
@@ -24,13 +24,14 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-title" content="React Pro">
-  <% for (var chunk in htmlWebpackPlugin.files.css) { %>
-    <link href="<%= htmlWebpackPlugin.files.css[chunk] %>" rel="stylesheet">
-  <% } %>
 </head>
 
 <body>
-  <div id="app"></div>
+  <div id="app">
+    <div class="dot-wrap">
+      <div class="dot-overtaking" />
+    </div>
+  </div>
   <% for (var chunk in htmlWebpackPlugin.files.chunks) { %>
     <script src="<%= htmlWebpackPlugin.files.chunks[chunk].entry %>"></script>
   <% } %>
