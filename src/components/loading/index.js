@@ -3,7 +3,13 @@ import React from 'react';
 
 const Loading = ({ error = false, errorCallBack }) => (
   <div>
-    {error ? <a onClick={errorCallBack}>{error}</a> : 'Loading...'}
+    {error
+      ? (
+        <a onClick={errorCallBack}>
+          {error}
+        </a>
+      )
+      : 'Loading...'}
   </div>
 );
 

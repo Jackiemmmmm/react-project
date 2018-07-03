@@ -121,9 +121,9 @@ exports.baseConfig = {
         collapseWhitespace: true,
         minifyCSS: true,
         minifyJS: source => (
-          source ?
-            compile({ jsCode: [{ src: source }] }).compiledCode :
-            ''
+          source
+            ? compile({ jsCode: [{ src: source }] }).compiledCode
+            : ''
         ),
         removeRedundantAttributes: true,
         useShortDoctype: true,

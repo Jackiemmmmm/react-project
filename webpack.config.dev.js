@@ -1,5 +1,5 @@
-const { baseConfig } = require('./webpack.config.base');
 const HardSourceWebpackPlugin = require('hard-source-webpack-plugin');
+const { baseConfig } = require('./webpack.config.base');
 
 module.exports = Object.assign({}, baseConfig, {
   mode: 'development',

@@ -14,28 +14,29 @@ const isIE = !!window.ActiveXObject || 'ActiveXObject' in window;
 
 ReactDOM.render(
   (
-    isIE ?
-      <div className="ie-must-die">
-        <div className="ie-container">
-          <p>
-            您当前使用的是IE浏览器，暂不能正常浏览和使用
-            <br />
-            建议更换以下浏览器后继续使用
-          </p>
-          <div className="link-browser">
-            <a href="http://rj.baidu.com/soft/detail/14744.html" rel="noopener noreferrer" target="_blank">
+    isIE
+      ? (
+        <div className="ie-must-die">
+          <div className="ie-container">
+            <p>
+              您当前使用的是IE浏览器，暂不能正常浏览和使用
               <br />
-              谷歌浏览器
-            </a>
-            <a href="http://rj.baidu.com/soft/detail/11843.html" className="link-last-item" rel="noopener noreferrer" target="_blank">
-              <br />
-              火狐浏览器
-            </a>
+              建议更换以下浏览器后继续使用
+            </p>
+            <div className="link-browser">
+              <a href="http://rj.baidu.com/soft/detail/14744.html" rel="noopener noreferrer" target="_blank">
+                <br />
+                谷歌浏览器
+              </a>
+              <a href="http://rj.baidu.com/soft/detail/11843.html" className="link-last-item" rel="noopener noreferrer" target="_blank">
+                <br />
+                火狐浏览器
+              </a>
+            </div>
           </div>
         </div>
-      </div>
-      :
-      <App />
+      )
+      : <App />
   ),
   document.getElementById('app'),
 );
