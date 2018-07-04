@@ -1,0 +1,52 @@
+@keyframes animateUp {
+  0% {
+    background-color: green;
+  }
+  100% {
+    background-color: white;
+  }
+}
+
+@keyframes animateUp1 {
+  0% {
+    background-color: green;
+  }
+  100% {
+    background-color: white;
+  }
+}
+
+@keyframes animateDown {
+  0% {
+    background-color: red;
+  }
+  100% {
+    background-color: white;
+  }
+}
+@keyframes animateDown1 {
+  0% {
+    background-color: red;
+  }
+  100% {
+    background-color: white;
+  }
+}
+
+.init {
+  animation-duration: 0.5s;
+  animation-timing-function: ease-in-out;
+}
+.up {
+  animation-name: animateUp;
+}
+.up1 {
+  animation-name: animateUp1;
+}
+
+.down {
+  animation-name: animateDown;
+}
+.down1 {
+  animation-name: animateDown1;
+}
